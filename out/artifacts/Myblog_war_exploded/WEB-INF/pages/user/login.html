@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/Myblog/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+    <link rel="stylesheet" href="static/css/login.css">
+</head>
+
+<style>
+    .yzm{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding-top: 40px;
+        padding-right: 60px;
+        padding-left: 70px;
+    }
+    .code
+    {
+        background-color: aquamarine;
+    }
+    #inputCode{
+        /* margin-top: 40px;
+        margin-left: 90px;
+        margin-right: 90px; */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        border: 2px solid #d9d9d9;
+        border-radius: 10px;
+    }
+
+</style>
+
+<body>
+<div class="con_body" id="app">
+    <div class="con_left">
+        <span id="con_font">欢迎来到Myblog</span>
+    </div>
+    <div class="con_right_1">
+        <p style="text-align:center;">
+        <div class="login_con">
+            <div class="login_con_top">
+                <p style="text-align:center ;">账号登入</p>
+            </div>
+            <!-- 登入框 -->
+            <form class="login_all" @submit.prevent="submitLogin(this)">
+                <div class="number">
+                    <img src="static/img/user.png" width="17px" height="17px">
+                    <input type="text" id="number" placeholder="请输入用户名" name="user_name" v-model="user_name">
+                </div>
+                <div class="number">
+                    <img src="static/img/lock.png" width="17px" height="17px">
+                    <input type="password" id="number" placeholder="请输入密码" name="user_pwd" v-model="user_pwd">
+                </div>
+                <!-- // 验证码区域 -->
+<!--                <div class="yzm">-->
+<!--                    <div id="checkCode" class="code"  onclick="createCode(4)" ></div>-->
+<!--                    <input type="text" id="inputCode"  style="float:left;" />-->
+<!--                </div>-->
+                <div class="submit_button">
+                    <input type="submit" id="submit" value="登入" >
+                </div>
+                <h5 v-model="l_msg" align="center">{{l_msg}}</h5>
+            </form>
+            <div class="login_foot">
+                <a href="#">忘记密码</a>
+                <a href="user?method=toregister">注册</a>
+            </div>
+        </div>
+        </p>
+    </div>
+</div>
+<script src="static/js/axios.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.7.0/vue.min.js"></script>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            user_name:"",
+            user_pwd:"",
+            l_msg:""
+        },
+        methods:{
+            submitLogin(){    //处理登入的方法
+                axios({
+                    "method":"post",
+                    "url":"user?method=login",
+                    "data":{
+                        "user_name":this.user_name,
+                        "user_pwd":this.user_pwd
+                    }
+                }).then(response=>{
+                    console.log(response.data)
+                    if (response.data.msg==='1'){
+                        window.location.href="user?method=tomsg"
+                    }else {
+                        this.l_msg=response.data.msg
+                    }
+                }).catch(error=>{
+                    this.l_msg=error.data.msg
+                    console.log("登入失败")
+                })
+            },
+
+        }
+    })
+</script>
+</body>
+
+</html>

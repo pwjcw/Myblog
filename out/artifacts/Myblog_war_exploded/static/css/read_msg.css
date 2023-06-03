@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #222;
+    background-color: #f5f5f5;
+}
+.msg_body{
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 800px;
+    /*height: 700px;*/
+    background-color:  #fff;
+}
+#title{
+    padding-top: 10px;
+    font-size: 30px;
+}
+#content{
+    font: 20px/1.750em "Georgia", serif;
+}
+#subheading{
+    display: flex;
+    justify-content: space-evenly;
+    font: 15px/1.750em "Georgia", serif;
+    border-bottom: #222 solid 1px;
+}

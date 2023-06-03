@@ -1,0 +1,90 @@
+.con_body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 50px;
+}
+.con_left {
+  background: url(../images/rotating.cd1714ee.png) rgb(92, 141, 253) no-repeat ;
+  background-size: cover;
+  background-position: 170px center;
+  width: 444px;
+  height: 500px;
+  /* background: rgb(92, 141, 253); */
+  /* z-index: 2; */
+  border-radius: 12px 0px 0px 20px;
+  position: relative;
+}
+#con_font{
+  color:white;
+  font-size: 20px;
+  position: relative;
+  left: 50px;
+  top: 220px;
+}
+.con_right_1{
+  width: 444px;
+  height: 500px;
+  background-color: rgb(239, 241, 255);
+  border-radius: 0px 20px 20px 0px;
+}
+.login_con{
+  width: 90%;
+  height: 90%;
+  background: rgb(255, 255, 255);
+  margin: auto;
+ border-radius: 20px;
+}
+.login_con_top{
+  width: 90px;
+  color:dodgerblue;
+  font-weight: 800;
+  border-bottom: 2px solid;
+  margin:  auto;
+  padding-top: 20px;
+}
+#number{
+  /* 去除边框和点击时的边框 */
+  border-style: none;
+  outline:none;
+}
+.number{
+  margin-top: 40px;
+  margin-left: 90px;
+  margin-right: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 2px solid #d9d9d9;
+  border-radius: 10px;
+}
+.login_all{
+  margin-top: 70px;
+}
+.submit_button{
+  margin-top: 40px;
+  margin-left: 90px;
+  margin-right: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#submit{
+  width:210px;
+  border: 0;
+  color: white;
+  background-color: dodgerblue;
+  border-radius: 12px;
+}
+.login_foot{
+  margin-top: 40px;
+  margin-left: 90px;
+  margin-right: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.login_foot>a{
+  text-decoration: none;
+  color: dodgerblue;
+}

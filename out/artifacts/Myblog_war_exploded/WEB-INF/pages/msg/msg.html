@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybolg</title>
+  <base href="/Myblog/">
+  <link href="static/css/msg.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+  <div th:if="${admin==1}">
+    <div id="admin">
+      <a href="msg?method=showAllMsg" class="admin_page">后台管理</a>
+    </div>
+  </div>
+  <div th:if="${user==1}">
+    <div id="write">
+      <a href="msg?method=toWritemsg" class="write_page">发布文章</a>
+    </div>
+    <div id="logout">
+      <a href="user?method=logout" class="write_page">退出登入</a>
+    </div>
+  </div>
+  <div th:if="${user==0}">
+    <div id="write">
+      <a href="user?method=tologin" class="write_page">登入</a>
+    </div>
+  </div>
+<div class="msg_body" id="app">
+  <div class="top">
+    <h2 align="center">blog</h2>
+  </div>
+  <div class="contents">
+    <ul >
+      <li id="con" v-for="m in msgs">
+        <div id="msg">
+          <p id="title"><a :href="'msg?method=toreadMsg&msg_id='+m.msg_id" id="title_a">{{m.msg_title}}</a></p>
+          <p class="m_content">{{m.msg_content}}</p>
+        </div>
+      </li>
+      <li id="button">
+        <p align="center">
+          <button @click="obtain" id="more">
+            查看更多
+          </button>
+        </p>
+      </li>
+    </ul>
+  </div>
+
+</div>
+<script src="static/js/axios.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.7.0/vue.min.js"></script>
+<script>
+  var app=new Vue({
+    el:"#app",
+    data:{
+      index:0,
+      msgs:[]
+    },
+    mounted:function(){    //页面加载完成后自动加载指定函数
+      this.obtain();
+      },
+    methods:{
+      obtain(){
+        axios({
+          "method":"post",
+          "url":"msg?method=showMsg",
+          "data":{
+            "index":this.index
+          }
+        }).then(response=>{
+          this.index+=11
+          console.log(response.data[0])
+          // this.msgs.push(response.data)
+          this.msgs = this.msgs.concat(response.data)    //将异步请求得到的数据添加到msgs
+          console.log(this.msgs)
+        })
+      },
+      replaceNewLine(str){
+        return str.replace(/\n/g, "<br>")      //将数据库里面的\n
+      }
+    }
+  })
+</script>
+</body>
+</html>
